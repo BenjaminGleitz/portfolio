@@ -1,0 +1,29 @@
+<header>
+    <nav class="nav">
+        <ul>
+            <div class="nav__left">
+                <h1 class="text"><a class="title" href="{{ path('home_index') }}">PORTFOLIO</a></h1>
+            </div>
+            <div class="nav__right">
+                <li><button class="nav_button"><a class="link nav-link nav-link__home" href="{{ path('home_index') }}">home</a></button></li>
+                <li><button class="nav_button"><a class="link nav-link nav-link__about" href="{{ path('skill_index') }}">about me</a></button></li>
+                <li><button class="nav_button"><a class="link nav-link nav-link__projects" href="{{ path('project_index') }}">projects</a></button></li>
+                {# <li><button class="nav_button"><a class="link nav-link nav-link__contact" href="{{ path('project_index') }}">contact</a></button></li> #}
+            </div>
+            <div class="nav__right--responsive">
+                <li><button class="nav_button"><a class="link nav-link nav-link__home" href="{{ path('home_index') }}"><i class="fa-solid fa-house"></i></i></a></button></li>
+                <li><button class="nav_button"><a class="link nav-link nav-link__about" href="{{ path('skill_index') }}"><i class="fa-solid fa-user"></i></a></button></li>
+                <li><button class="nav_button"><a class="link nav-link nav-link__projects"  href="{{ path('project_index') }}"><i class="fas fa-archive"></i></a></button></li>
+                {# <li><button class="nav_button"><a class="link nav-link nav-link__contact" href="{{ path('project_index') }}"><i class="fas fa-envelope"></i></a></button></li> #}
+            </div>
+        </ul>
+    </nav>
+</header>
+{# <section class="banner"></section> #}
+<script type="text/javascript">
+    window.addEventListener("scroll", function() {
+        var header = document.querySelector(".nav");
+        header.classList.toggle("sticky", window.scrollY > 0)
+    })
+</script>
+</body>
