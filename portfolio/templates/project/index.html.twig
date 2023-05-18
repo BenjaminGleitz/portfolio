@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes projets !{% endblock %}
+
+{% block body %}
+
+{% if projects|length <= 2 %}
+<div class="wrapper">
+{% else %}
+    <div class="wrapper wrapper_project">     
+{% endif %}
+<div class="projects">
+    <h1 class="important">Mes Projets !</h1>
+    <div class="project_container">
+        {% for project in projects %}
+            <div class="project_card">
+                <a class="project_card--img" href="{{ path('project_show', {'id': project.id}) }}">
+                    <img src="{{ asset('img/' ~ project.image) }}" alt="">
+                    <div class="project_card__name">
+                        <div class="button_container">
+                            <a class="btn_card" href="{{ path('project_show', {'id': project.id}) }}">{{ project.name }}</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+{% endblock %}
