@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+            <div class="wrapper">
+                <div class="wrapper__left wrapper__left--detail">
+                    <h1 class="important">{{ project.name }}</h1>
+                    <p>{{ project.description }}</p>
+                    <p class="back__button"><a href="{{ path('project_index') }}"><i class="fa-regular fa-hand-point-left"></i> projets</a></p>
+                </div>
+                <div class=" wrapper__right wrapper__right--detail">
+                    <img class="project__img" src="{{ asset('img/' ~ project.image) }}" alt="">
+                    <button class="github_button_project"><a href="{{ project.github }}" target="_blank" class="github_button_project--link"><i class="fab fa-github-square fa-3x"></i>Lien Github</a></button>      
+                    <p class="back__button back__button--responsive"><a href="{{ path('project_index') }}"><i class="fa-regular fa-hand-point-left"></i> projets</a></p>
+                </div>
+            </div>
+{% endblock %}

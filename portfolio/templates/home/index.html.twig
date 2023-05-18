@@ -3,18 +3,17 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/symfony/portfolio/portfolio/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/symfony/portfolio/portfolio/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+ <div class="wrapper">
+        <div class="wrapper__left">
+            <h1 class="important">Bonjour ! &#129304</h1>
+            <p>Moi c'est <strong>Benjamin Gleitz</strong> et je suis développeur web !  <br> Dans le cadre d'un bachelor Développeur web avec l'école <em class="important">MyDigitalSchool</em> à <em class="important">Montpellier</em>, je suis à la recherche d'un poste de <em class="important">développeur web en alternance</em>, alors n'hésite pas à me contacter ! &#128640 </p>
+            <p>Junior dans le milieu, j'ai de bonnes connaissances en développement Web.<em class="important"> Je suis passionné et super motivé</em> à l'idée d'évoluer dans le monde du développement Web.</p>
+        </div>
+        <div class="wrapper__right">
+            <div class="profil">
+                <img class="profile__img" src="{{ asset('img/profile-pic.png') }}">
+            </div>
+        </div>
+    </div>
 {% endblock %}

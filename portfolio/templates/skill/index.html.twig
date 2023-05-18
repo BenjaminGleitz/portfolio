@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AboutMeController!{% endblock %}
+
+{% block body %}
+
+ <div class="wrapper">
+        <div class="wrapper__left wrapper__left--skills">
+            <p class="skills__text"> 
+                Frontend développeur
+                Junior dans le milieu, j'ai de bonnes connaissances en développement Web. Je suis passionné et motivé pour évoluer dans le monde du développement Web.
+            </p>
+            <div class="skill">
+                <ol class="skill__left">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>PHP</li>
+                    <li>JavaScript</li>
+                </ol>
+                <ol class="skill__right">
+                    <li>GitHub</li>
+                    <li>Api Rest</li>
+                    <li>Symfony</li>
+                    <li>React</li>
+                </ol>
+            </div>
+        </div>
+        <div class="wrapper__right">
+            <h1 class="about_me important">Contactez-moi !</h1>
+            <div class="contact-items">
+                    <p class="important"><em>Email</em>   :    gleitz.benjamin.pro@gmail.com</i></p>
+                    <p class="important"><em>Téléphone</em>   :    06.08.23.71.65</p>
+                    <p class="important"><em>Github</em>   :    <a href="https://github.com/BenjaminGleitz" target="_blank">Benjamin Gleitz</a></p>
+                    <p class="important"><em>LinkedIn</em>   :    <a href="https://www.linkedin.com/in/benjamin-gleitz-bab1b5159/" target="_blank">Benjamin Gleitz</a></p>
+                </ul>
+            </div>
+            <button class="cv_button">
+                <a class="link"download href="{{ asset('cv/benjamin-gleitz-cv.pdf') }}">telecharger mon CV</a>
+                <span class="arrow">
+                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            </button>
+            <div class="icon_container">
+                <a href="https://github.com/BenjaminGleitz?tab=repositories" target="_blank" class="icon"><i class="fab fa-github-square fa-2x"></i></a>
+                <a href="https://www.linkedin.com/in/benjamin-gleitz-bab1b5159/" target="_blank" class="icon"><i class="fab fa-linkedin fa-2x"></i></a>
+            </div>
+        <script type="text/javascript">
+            const test = document.querySelectorAll(".icon");
+            console.log(test);
+            test.forEach((e) => {
+                e.addEventListener('mouseenter', () => e.classList.toggle("icon_hover"));
+                e.addEventListener('mouseleave', () => e.classList.remove("icon_hover"));
+            });
+        </script>
+        </div>
+    </div>
+{% endblock %}
