@@ -596,6 +596,7 @@ span.arrow i:nth-child(3){
 
 .wrapper__left--detail p, .wrapper__left--detail h1 {
     margin: 1em;
+    word-break: break-word;;
 }
 
 .github_button_project {
@@ -613,7 +614,7 @@ span.arrow i:nth-child(3){
     -webkit-transition: all .1s;
     float: left;
     font-weight: bold;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
 }
 
 .github_button_project:active {
