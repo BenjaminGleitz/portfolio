@@ -1,8 +1,8 @@
 ## Project status
 
-Personal portfolio site, freshly scaffolded from the Astro "basics" starter (Astro 7, Node >= 22.12). `src/pages/index.astro` still renders the placeholder `Welcome.astro` component — expect to replace it (along with `src/assets/astro.svg`, `background.svg`, and the "Astro Basics" `<title>` in `Layout.astro`) as real content is added.
+Personal portfolio site (Astro 7, Node >= 22.12), bilingual FR/EN. Pages `src/pages/index.astro` (fr, `/`) and `src/pages/en/index.astro` (en, `/en/`) are identical: each resolves its language with `getLang(Astro.currentLocale)` and passes it as the `lang` prop to `Layout` and every section component, which call `useTranslations(lang)` from `src/i18n/utils.ts`.
 
-No integrations (React, Tailwind, MDX, etc.) or content collections are configured yet. `astro.config.mjs` is empty, so the site builds as fully static output. No database.
+`astro.config.mjs` only configures i18n routing (`fr` default, unprefixed); no other integrations (Tailwind comes later) or content collections yet. Fully static output, no database.
 
 ## Development
 
@@ -18,7 +18,7 @@ Other commands:
 
 - `npm run build` — static production build to `./dist/`
 - `npm run preview` — serve the built `./dist/` locally
-- `npm test` — Vitest (single file: `npx vitest run tests/Layout.test.ts`; by name: `npx vitest run -t "<test name>"`)
+- `npm test` — Vitest (single file: `npx vitest run tests/Header.test.ts`; by name: `npx vitest run -t "<test name>"`)
 - `npm run lint` — `astro check` (type-check `.astro`/`.ts`) then `prettier --check .`
 - `npm run format` — rewrite files with Prettier (tabs, single quotes, `prettier-plugin-astro`)
 - `npx astro add <integration>` — add integrations (e.g. `tailwind`); updates `astro.config.mjs` and `package.json` for you
@@ -34,12 +34,16 @@ Tests live in `tests/*.test.ts`. `vitest.config.ts` wraps Astro's `getViteConfig
 - `src/components/` — reusable `.astro` components. `<style>` blocks in `.astro` files are component-scoped by default.
 - `src/assets/` — imported assets processed by Astro (use `import x from '../assets/x.svg'` then `x.src`); `public/` — files served verbatim at the site root.
 
+Design reference: `docs/design/Portfolio.html` (Claude Design export — open it in a browser; desktop 1440 and mobile 390 mockups plus annotated wireframes). Follow it for layout, colors, typography, and section order.
+
 `CLAUDE.md` imports this file; put shared guidance here, not in `CLAUDE.md`.
 
 ## Code conventions
 
 - **No JS framework**: only `.astro` components and plain HTML/CSS. Client-side `<script>` only where unavoidable (FR/EN toggle, dark mode), kept minimal.
-- **No hard-coded UI text**: every visible string comes from the FR/EN translation files, using Astro's built-in i18n routing — the site stays bilingual from the first component.
+- **No hard-coded UI text**: the site stays bilingual from the first component, using Astro's built-in i18n routing (`fr` default at `/`, `en` at `/en/`).
+  - Text that differs by language (sentences, headings, labels) goes in `src/i18n/ui.ts`, with every key present in both `fr` and `en`. A sentence containing a proper noun stays whole in `ui.ts` — don't split it.
+  - Data identical in every language (name, email, GitHub/LinkedIn URLs, technology names) goes once in `src/data/` (e.g. `src/data/profile.ts`), not duplicated per language.
 - **Typed props**: every component that takes props declares `interface Props`.
 - **One test per component**: each new component gets at least one Vitest test in `tests/` rendering it through the Container API.
 - **Add integrations with `npx astro add <name>`**, never by hand-editing `astro.config.mjs`/`package.json`.

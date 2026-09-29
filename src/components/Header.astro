@@ -1,0 +1,18 @@
+---
+import { profile } from '../data/profile';
+import type { ui } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+	lang: keyof typeof ui;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<header>
+	<h1>{profile.name}</h1>
+	<p>{t('header.title')}</p>
+	<p>{t('header.goal')}</p>
+</header>
