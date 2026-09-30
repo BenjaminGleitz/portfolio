@@ -7,8 +7,12 @@ export const defaultLang = 'fr';
 
 export const ui = {
 	fr: {
-		'header.title': 'Développeur web junior · PHP/Symfony & Java',
-		'header.goal': 'À la recherche de mon premier poste à Montréal',
+		'hero.greeting': 'Bonjour',
+		'hero.intro': 'Je suis {name}',
+		'hero.title': 'Développeur web junior',
+		'hero.available': 'Disponible à Montréal',
+		'hero.cta.projects': 'Voir mes projets',
+		'hero.cta.cv': 'Mon CV',
 		'nav.label': 'Navigation principale',
 		'nav.home': 'Accueil',
 		'nav.about': 'À propos',
@@ -17,8 +21,12 @@ export const ui = {
 		'nav.menu': 'Menu',
 	},
 	en: {
-		'header.title': 'Junior Web Developer · PHP/Symfony & Java',
-		'header.goal': 'Looking for my first developer role in Montréal',
+		'hero.greeting': 'Hello',
+		'hero.intro': "I'm {name}",
+		'hero.title': 'Junior Web Developer',
+		'hero.available': 'Available in Montréal',
+		'hero.cta.projects': 'See my projects',
+		'hero.cta.cv': 'My résumé',
 		'nav.label': 'Main navigation',
 		'nav.home': 'Home',
 		'nav.about': 'About',
