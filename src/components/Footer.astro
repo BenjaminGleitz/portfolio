@@ -1,0 +1,22 @@
+---
+import { profile } from '../data/profile';
+import type { ui } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+	lang: keyof typeof ui;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Année calculée au moment du build : elle se met à jour à chaque déploiement.
+const year = new Date().getFullYear();
+---
+
+<footer class="flex flex-col gap-1 border-t border-line-soft bg-surface-alt px-6 py-7 text-xs text-subtle md:px-gutter lg:flex-row lg:justify-between lg:text-[13px]">
+	<p>
+		© {year} {profile.name}
+	</p>
+	<p>{t('footer.made')}</p>
+</footer>
