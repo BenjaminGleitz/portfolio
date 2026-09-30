@@ -19,3 +19,8 @@
 	--color-accent: #5cb8ff;
 	--color-accent-hover: #86cbff;
 }
+
+@theme inline {
+	/*noinspection CssUnresolvedCustomProperty*/
+	--font-sans: var(--font-montserrat);
+}
