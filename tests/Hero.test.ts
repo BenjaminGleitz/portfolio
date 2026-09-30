@@ -53,3 +53,14 @@ test('Hero lists the main stack and links both calls to action', async () => {
 		new RegExp(`<a[^>]*href="${profile.cv}"[^>]*>\\s*${ui.fr['hero.cta.cv']}`),
 	);
 });
+
+test('Hero shows the portrait with a translated alt, loaded first', async () => {
+	const container = await AstroContainer.create();
+
+	for (const lang of ['fr', 'en'] as const) {
+		const html = await container.renderToString(Hero, { props: { lang } });
+		const alt = ui[lang]['hero.photoAlt'].replace('{name}', profile.name);
+		expect(html).toMatch(new RegExp(`<img[^>]*alt="${alt}"`));
+		expect(html).toMatch(/<img[^>]*fetchpriority="high"/);
+	}
+});

@@ -18,6 +18,31 @@
 	/* Accent */
 	--color-accent: #5cb8ff;
 	--color-accent-hover: #86cbff;
+
+	/*
+	 * Marge latérale des sections à partir de md : 120px, puis elle grandit
+	 * pour que le contenu ne dépasse jamais 1200px (largeur de la maquette).
+	 * Génère px-gutter, -ml-gutter, etc.
+	 */
+	--spacing-gutter: max(7.5rem, calc((100vw - 75rem) / 2));
+
+	/* Animations du hero */
+	--animate-spin-slow: spin-slow 38s linear infinite;
+	--animate-reveal: reveal 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+	@keyframes spin-slow {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	/* Apparition en fondu, du bas vers le haut. */
+	@keyframes reveal {
+		from {
+			opacity: 0;
+			transform: translateY(18px);
+		}
+	}
 }
 
 @theme inline {

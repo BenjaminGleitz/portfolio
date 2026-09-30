@@ -13,7 +13,7 @@ const t = useTranslations(lang);
 
 <!-- Pas de titre visible : le libellé sert aux lecteurs d'écran. -->
 <section aria-label={t('techBand.label')} class="bg-surface">
-	<ul class="flex flex-wrap justify-center gap-x-[22px] gap-y-3 px-6 py-[22px] text-[15px] font-light text-subtle md:px-30 lg:h-[100px] lg:items-center lg:justify-between lg:py-0 lg:text-[21px]">
+	<ul class="flex flex-wrap justify-center gap-x-[22px] gap-y-3 px-6 py-[22px] text-[15px] font-light text-subtle md:px-gutter lg:h-[100px] lg:items-center lg:justify-between lg:py-0 lg:text-[21px]">
 		{profile.techs.map((tech) => (
 			<li class="transition-colors duration-250 hover:text-text">{tech}</li>
 		))}
