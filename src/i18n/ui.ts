@@ -34,6 +34,19 @@ export const ui = {
 		'skills.tooling.title': 'Outillage au quotidien',
 		'skills.tooling.desc':
 			'Docker pour les environnements, Git et revues de code.',
+		'projects.title': 'Projets',
+		'projects.code': 'Voir le code',
+		'projects.demo': 'Démo en ligne',
+		'projects.placeholder': 'Capture à venir',
+		'projects.budget.title': 'Gestionnaire de budget',
+		'projects.budget.desc':
+			'Application de suivi des dépenses personnelles : catégories, budgets mensuels, graphiques de synthèse et export CSV. Authentification et gestion des rôles.',
+		'projects.booking.title': 'API de réservations',
+		'projects.booking.desc':
+			'API REST de réservation de créneaux : disponibilités, gestion des conflits, validation des données et documentation OpenAPI. Testée avec JUnit, livrée en conteneur Docker.',
+		'projects.bixi.title': 'Carte BIXI',
+		'projects.bixi.desc':
+			'Carte interactive des stations BIXI construite à partir des données ouvertes de Montréal : vélos et bornes disponibles, filtres par arrondissement.',
 		'nav.label': 'Navigation principale',
 		'nav.home': 'Accueil',
 		'nav.about': 'À propos',
@@ -67,6 +80,19 @@ export const ui = {
 		'skills.db.desc': 'Relational modeling and MySQL queries.',
 		'skills.tooling.title': 'Everyday tooling',
 		'skills.tooling.desc': 'Docker for environments, Git and code reviews.',
+		'projects.title': 'Projects',
+		'projects.code': 'View code',
+		'projects.demo': 'Live demo',
+		'projects.placeholder': 'Screenshot coming soon',
+		'projects.budget.title': 'Budget tracker',
+		'projects.budget.desc':
+			'Personal expense tracking app: categories, monthly budgets, summary charts and CSV export. Authentication and role management.',
+		'projects.booking.title': 'Booking API',
+		'projects.booking.desc':
+			'REST API for booking time slots: availability, conflict handling, data validation and OpenAPI documentation. Tested with JUnit, shipped as a Docker container.',
+		'projects.bixi.title': 'BIXI map',
+		'projects.bixi.desc':
+			'Interactive map of BIXI stations built from Montréal open data: available bikes and docks, filters by borough.',
 		'nav.label': 'Main navigation',
 		'nav.home': 'Home',
 		'nav.about': 'About',
