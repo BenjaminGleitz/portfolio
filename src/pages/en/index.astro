@@ -14,10 +14,12 @@ const lang = getLang(Astro.currentLocale);
 
 <Layout lang={lang}>
 	<Nav lang={lang} />
-	<Hero lang={lang} />
-	<TechBand lang={lang} />
-	<About lang={lang} />
-	<Projects lang={lang} />
-	<Contact lang={lang} />
+	<main id="main">
+		<Hero lang={lang} />
+		<TechBand lang={lang} />
+		<About lang={lang} />
+		<Projects lang={lang} />
+		<Contact lang={lang} />
+	</main>
 	<Footer lang={lang} />
 </Layout>
