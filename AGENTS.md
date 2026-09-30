@@ -2,7 +2,7 @@
 
 Personal portfolio site (Astro 7, Node >= 22.12), bilingual FR/EN. Pages `src/pages/index.astro` (fr, `/`) and `src/pages/en/index.astro` (en, `/en/`) are identical: each resolves its language with `getLang(Astro.currentLocale)` and passes it as the `lang` prop to `Layout` and every section component, which call `useTranslations(lang)` from `src/i18n/utils.ts`.
 
-`astro.config.mjs` only configures i18n routing (`fr` default, unprefixed); no other integrations (Tailwind comes later) or content collections yet. Fully static output, no database.
+`astro.config.mjs` configures i18n routing (`fr` default, unprefixed) and Tailwind CSS v4 via the `@tailwindcss/vite` plugin; the stylesheet is `src/styles/global.css` (`@import 'tailwindcss'`, theme tokens in `@theme`), imported once in `Layout.astro`. No content collections yet. Fully static output, no database.
 
 ## Development
 

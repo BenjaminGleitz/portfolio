@@ -1,4 +1,5 @@
 ---
+import '../styles/global.css';
 import { profile } from '../data/profile';
 import type { ui } from '../i18n/ui';
 
@@ -19,16 +20,7 @@ const { lang } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{profile.name}</title>
 	</head>
-	<body>
+	<body class="bg-bg text-text antialiased">
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
