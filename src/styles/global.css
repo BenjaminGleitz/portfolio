@@ -15,29 +15,8 @@
 	--color-dusk: #7f6fa8;
 	--color-ink-soft: #4a4f63;
 	--color-sand: #ece3da;
-	--color-chip-light: #f3ece6;
+	--color-chip: #f3ece6;
 	--color-status: #2f9467;
-
-	/* Ancien thème sombre : encore utilisé par les sections pas encore restylées. */
-	/* Fonds */
-	--color-bg: #12161d;
-	--color-surface: #181d26;
-	--color-surface-alt: #161b23;
-	--color-chip: #1c222d;
-
-	/* Bordures */
-	--color-line: #2a3240;
-	--color-line-soft: #262d39;
-
-	/* Texte */
-	--color-text: #e8ecf2;
-	--color-soft: #c3cad5;
-	--color-muted: #a3acba;
-	--color-subtle: #7d8799;
-
-	/* Accent */
-	--color-accent: #5cb8ff;
-	--color-accent-hover: #86cbff;
 
 	/*
 	 * Marge latérale des sections à partir de md : 120px, puis elle grandit
@@ -94,6 +73,24 @@
 	--font-mono: var(--font-jetbrains);
 	/*noinspection CssUnresolvedCustomProperty*/
 	--font-serif: var(--font-instrument);
+}
+
+/*
+ * Ciel étoilé (section Contact) : petits points blancs en radial-gradient.
+ * Le pseudo-élément ::after duplique le motif décalé et scintille (motion-safe).
+ */
+@utility stars {
+	background-image:
+		radial-gradient(1.4px 1.4px at 12% 22%, #fff 50%, transparent 51%),
+		radial-gradient(1px 1px at 28% 64%, #fff 50%, transparent 51%),
+		radial-gradient(1.6px 1.6px at 46% 18%, #fff 50%, transparent 51%),
+		radial-gradient(1px 1px at 63% 42%, #fff 50%, transparent 51%),
+		radial-gradient(1.3px 1.3px at 78% 12%, #fff 50%, transparent 51%),
+		radial-gradient(1px 1px at 88% 58%, #fff 50%, transparent 51%),
+		radial-gradient(1.2px 1.2px at 8% 80%, #fff 50%, transparent 51%),
+		radial-gradient(1px 1px at 55% 86%, #fff 50%, transparent 51%),
+		radial-gradient(1.5px 1.5px at 93% 32%, #fff 50%, transparent 51%),
+		radial-gradient(1px 1px at 36% 38%, #fff 50%, transparent 51%);
 }
 
 @layer base {
