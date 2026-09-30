@@ -10,7 +10,7 @@ export const ui = {
 		'hero.greeting': 'Bonjour',
 		'hero.intro': 'Je suis {name}',
 		'hero.title': 'Développeur web junior',
-		'hero.available': 'Disponible à Montréal',
+		'hero.available': 'Ouvert aux opportunités',
 		'hero.cta.projects': 'Voir mes projets',
 		'hero.cta.cv': 'Mon CV',
 		'hero.photoAlt': 'Portrait de {name}',
@@ -19,7 +19,7 @@ export const ui = {
 		'about.p1':
 			"Après une formation en développement web, j'ai construit mes premières applications avec Symfony, puis je me suis tourné vers Java et Spring Boot. Ce qui me plaît : comprendre ce qui se passe côté serveur, structurer une base de données proprement et livrer du code que les autres ont envie de relire.",
 		'about.p2':
-			"Je m'installe à Montréal pour rejoindre une équipe où apprendre vite et contribuer concrètement. Le Québec m'attire pour son écosystème tech dynamique, sa culture bilingue et la place qu'il laisse aux profils juniors motivés.",
+			"Je cherche aujourd'hui à rejoindre une équipe où apprendre vite et contribuer concrètement : un environnement où l'on partage ses connaissances et où un profil junior motivé peut trouver sa place.",
 		'about.chip.search': 'Recherche : premier poste ou stage',
 		'about.chip.languages': 'Français · Anglais',
 		'skills.title': 'Ce que je sais faire',
@@ -47,6 +47,13 @@ export const ui = {
 		'projects.bixi.title': 'Carte BIXI',
 		'projects.bixi.desc':
 			'Carte interactive des stations BIXI construite à partir des données ouvertes de Montréal : vélos et bornes disponibles, filtres par arrondissement.',
+		'contact.title': 'Contact',
+		'contact.text':
+			'Un poste, un stage ou simplement une question ? Écrivez-moi, je réponds rapidement.',
+		'contact.email': 'Email',
+		'contact.cv': 'CV',
+		'contact.cvLink': 'Télécharger le CV (PDF)',
+		'footer.made': 'Conçu et codé avec Astro',
 		'nav.label': 'Navigation principale',
 		'nav.home': 'Accueil',
 		'nav.about': 'À propos',
@@ -58,7 +65,7 @@ export const ui = {
 		'hero.greeting': 'Hello',
 		'hero.intro': "I'm {name}",
 		'hero.title': 'Junior Web Developer',
-		'hero.available': 'Available in Montréal',
+		'hero.available': 'Open to opportunities',
 		'hero.cta.projects': 'See my projects',
 		'hero.cta.cv': 'My résumé',
 		'hero.photoAlt': 'Portrait of {name}',
@@ -67,7 +74,7 @@ export const ui = {
 		'about.p1':
 			'After training in web development, I built my first applications with Symfony, then moved on to Java and Spring Boot. What I enjoy: understanding what happens on the server side, structuring a database cleanly and shipping code that others are happy to review.',
 		'about.p2':
-			"I'm moving to Montréal to join a team where I can learn fast and make a real contribution. Québec appeals to me for its dynamic tech scene, its bilingual culture and the room it gives motivated junior developers.",
+			"I'm now looking to join a team where I can learn fast and make a real contribution: a place where knowledge is shared and a motivated junior developer can grow.",
 		'about.chip.search': 'Looking for: first job or internship',
 		'about.chip.languages': 'French · English',
 		'skills.title': 'What I can do',
@@ -93,6 +100,13 @@ export const ui = {
 		'projects.bixi.title': 'BIXI map',
 		'projects.bixi.desc':
 			'Interactive map of BIXI stations built from Montréal open data: available bikes and docks, filters by borough.',
+		'contact.title': 'Contact',
+		'contact.text':
+			'A job, an internship or just a question? Write to me, I reply quickly.',
+		'contact.email': 'Email',
+		'contact.cv': 'Résumé',
+		'contact.cvLink': 'Download my résumé (PDF)',
+		'footer.made': 'Designed and built with Astro',
 		'nav.label': 'Main navigation',
 		'nav.home': 'Home',
 		'nav.about': 'About',

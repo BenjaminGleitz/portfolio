@@ -1,0 +1,93 @@
+---
+import { profile } from '../data/profile';
+import type { ui } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+	lang: keyof typeof ui;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Affiche une URL sans protocole, « www. » ni slash final : linkedin.com/in/…
+const displayUrl = (url: string) =>
+	url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+
+const links = [
+	{
+		label: t('contact.email'),
+		value: profile.email,
+		href: `mailto:${profile.email}`,
+		icon: '→',
+	},
+	{
+		label: 'LinkedIn',
+		value: displayUrl(profile.linkedin),
+		href: profile.linkedin,
+		icon: '↗',
+		external: true,
+	},
+	{
+		label: 'GitHub',
+		value: displayUrl(profile.github),
+		href: profile.github,
+		icon: '↗',
+		external: true,
+	},
+	{
+		label: t('contact.cv'),
+		value: t('contact.cvLink'),
+		href: profile.cv,
+		icon: '↓',
+		download: true,
+	},
+];
+---
+
+<!--
+	Mobile : titre, texte puis la liste, libellé au-dessus de la valeur.
+	Desktop (lg) : deux colonnes 5fr / 7fr, chaque lien sur une ligne libellé | valeur | icône.
+-->
+<section
+	id="contact"
+	aria-labelledby="contact-title"
+	class="bg-surface-alt px-6 pt-14 pb-10 md:px-gutter lg:grid lg:grid-cols-[5fr_7fr] lg:gap-16 lg:pt-[120px] lg:pb-[100px] xl:gap-[110px]"
+>
+	<div class="flex flex-col gap-3.5 lg:gap-[22px]">
+		<h2 id="contact-title" class="text-[32px] font-medium lg:text-[52px]">
+			{t('contact.title')}
+			<span class="text-accent">.</span>
+		</h2>
+		<p class="mb-2.5 max-w-[380px] text-[15px] leading-[1.7] font-light text-soft lg:mb-0 lg:text-[17px] lg:leading-[1.8]">
+			{t('contact.text')}
+		</p>
+	</div>
+
+	<ul>
+		{links.map((link) => (
+			<li>
+				<a
+					href={link.href}
+					target={link.external ? '_blank' : undefined}
+					rel={link.external ? 'noreferrer' : undefined}
+					download={link.download}
+					class="flex min-h-11 items-center justify-between border-b border-line-soft py-3.5 transition-[padding,color] duration-300 hover:text-accent lg:py-5 lg:hover:pl-3 xl:grid xl:grid-cols-[140px_1fr_24px] xl:py-[26px]"
+				>
+					{/* À partir de xl, « contents » fait du libellé et de la valeur deux cellules de la grille. */}
+					<span class="flex flex-col gap-1 xl:contents">
+						<span class="text-[11px] tracking-[.1em] text-subtle uppercase lg:text-[13px]">
+							{link.label}
+						</span>
+						<span class="text-[15px] wrap-anywhere lg:text-[17px] xl:text-[19px]">
+							{link.value}
+						</span>
+					</span>
+					<span class="lg:text-lg" aria-hidden="true">
+						{link.icon}
+					</span>
+				</a>
+			</li>
+		))}
+	</ul>
+</section>
