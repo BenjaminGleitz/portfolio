@@ -1,5 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-	<rect width="64" height="64" rx="14" fill="#12161d" />
-	<text x="28" y="46" font-family="Montserrat, 'Segoe UI', Arial, sans-serif" font-size="40" font-weight="500" fill="#e8ecf2" text-anchor="middle">B</text>
-	<circle cx="47" cy="42.5" r="4.5" fill="#5cb8ff" />
+	<defs>
+		<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#6fa8d6" />
+			<stop offset="0.6" stop-color="#d9c3de" />
+			<stop offset="1" stop-color="#f6d5c0" />
+		</linearGradient>
+	</defs>
+	<rect width="64" height="64" rx="14" fill="url(#sky)" />
+	<text x="28" y="46" font-family="'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace" font-size="40" font-weight="500" fill="#1c2238" text-anchor="middle">B</text>
+	<circle cx="48" cy="42.5" r="4.5" fill="#ffffff" />
 </svg>

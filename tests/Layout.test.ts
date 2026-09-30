@@ -26,7 +26,7 @@ test('Layout sets a translated title, description and share preview', async () =
 
 	for (const lang of ['fr', 'en'] as const) {
 		const html = await container.renderToString(Layout, { props: { lang } });
-		const title = `${profile.name} — ${ui[lang]['hero.title']}`;
+		const title = `${profile.name} — ${ui[lang]['meta.role']}`;
 		expect(html).toContain(`<title>${title}</title>`);
 		expect(html).toMatch(
 			new RegExp(

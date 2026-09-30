@@ -1,25 +1,22 @@
 @import 'tailwindcss';
 
 @theme {
-	/* Fonds */
-	--color-bg: #12161d;
-	--color-surface: #181d26;
-	--color-surface-alt: #161b23;
-	--color-chip: #1c222d;
-
-	/* Bordures */
-	--color-line: #2a3240;
-	--color-line-soft: #262d39;
-
-	/* Texte */
-	--color-text: #e8ecf2;
-	--color-soft: #c3cad5;
-	--color-muted: #a3acba;
-	--color-subtle: #7d8799;
-
-	/* Accent */
-	--color-accent: #5cb8ff;
-	--color-accent-hover: #86cbff;
+	/*
+	 * Palette « au fil d'une journée » : ciel de jour → coucher de soleil → nuit.
+	 * Référence : docs/design/portfolio-ciel.html
+	 */
+	--color-night: #1c2238;
+	--color-sky-1: #6fa8d6;
+	--color-sky-2: #a9c4e4;
+	--color-sky-3: #d9c3de;
+	--color-sky-4: #f1c6c0;
+	--color-sky-5: #f6d5c0;
+	--color-cream: #fbf6f1;
+	--color-dusk: #7f6fa8;
+	--color-ink-soft: #4a4f63;
+	--color-sand: #ece3da;
+	--color-chip: #f3ece6;
+	--color-status: #2f9467;
 
 	/*
 	 * Marge latérale des sections à partir de md : 120px, puis elle grandit
@@ -31,10 +28,32 @@
 	/* Animations du hero */
 	--animate-spin-slow: spin-slow 38s linear infinite;
 	--animate-reveal: reveal 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	--animate-drift: drift linear infinite;
+	--animate-twinkle: twinkle 4s ease-in-out infinite alternate;
 
 	@keyframes spin-slow {
 		to {
 			transform: rotate(360deg);
+		}
+	}
+
+	/* Nuages : traversent leur conteneur (100cqw = largeur du conteneur @container). */
+	@keyframes drift {
+		from {
+			transform: translateX(-260px);
+		}
+		to {
+			transform: translateX(calc(100cqw + 40px));
+		}
+	}
+
+	/* Étoiles : scintillement doux. */
+	@keyframes twinkle {
+		from {
+			opacity: 0.15;
+		}
+		to {
+			opacity: 0.7;
 		}
 	}
 
@@ -49,13 +68,36 @@
 
 @theme inline {
 	/*noinspection CssUnresolvedCustomProperty*/
-	--font-sans: var(--font-montserrat);
+	--font-sans: var(--font-hanken);
+	/*noinspection CssUnresolvedCustomProperty*/
+	--font-mono: var(--font-jetbrains);
+	/*noinspection CssUnresolvedCustomProperty*/
+	--font-serif: var(--font-instrument);
+}
+
+/*
+ * Ciel étoilé (section Contact) : petits points blancs en radial-gradient.
+ * Le pseudo-élément ::after duplique le motif décalé et scintille (motion-safe).
+ */
+@utility stars {
+	background-image:
+		radial-gradient(1.4px 1.4px at 12% 22%, #fff 50%, transparent 51%),
+		radial-gradient(1px 1px at 28% 64%, #fff 50%, transparent 51%),
+		radial-gradient(1.6px 1.6px at 46% 18%, #fff 50%, transparent 51%),
+		radial-gradient(1px 1px at 63% 42%, #fff 50%, transparent 51%),
+		radial-gradient(1.3px 1.3px at 78% 12%, #fff 50%, transparent 51%),
+		radial-gradient(1px 1px at 88% 58%, #fff 50%, transparent 51%),
+		radial-gradient(1.2px 1.2px at 8% 80%, #fff 50%, transparent 51%),
+		radial-gradient(1px 1px at 55% 86%, #fff 50%, transparent 51%),
+		radial-gradient(1.5px 1.5px at 93% 32%, #fff 50%, transparent 51%),
+		radial-gradient(1px 1px at 36% 38%, #fff 50%, transparent 51%);
 }
 
 @layer base {
 	/* Contour visible uniquement pour la navigation au clavier */
 	:focus-visible {
-		outline: 2px solid var(--color-accent);
+		/* currentColor : reste visible sur le ciel clair comme sur la nuit. */
+		outline: 2px solid currentColor;
 		outline-offset: 3px;
 	}
 

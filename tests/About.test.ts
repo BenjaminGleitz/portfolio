@@ -1,18 +1,12 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { expect, test } from 'vitest';
 import About from '../src/components/About.astro';
+import { skills } from '../src/data/skills';
 import { ui } from '../src/i18n/ui';
 
 // Astro escapes apostrophes in text, so decode the markup before comparing.
 const decode = (html: string) =>
 	html.replaceAll('&#39;', "'").replaceAll('&amp;', '&');
-
-const skillTitles = [
-	'skills.symfony.title',
-	'skills.java.title',
-	'skills.db.title',
-	'skills.tooling.title',
-] as const;
 
 test('About renders the French section with its anchor and heading', async () => {
 	const container = await AstroContainer.create();
@@ -38,18 +32,23 @@ test('About renders English text for lang "en"', async () => {
 
 	expect(html).toContain(ui.en['about.title']);
 	expect(html).toContain(ui.en['about.p2']);
-	expect(html).toContain(ui.en['skills.title']);
+	expect(html).toContain(ui.en['skills.deploy.title']);
 	expect(html).not.toContain(ui.fr['about.p2']);
 });
 
-test('Skills timeline lists every skill in order', async () => {
+test('Skills are grouped in cards with every item in order', async () => {
 	const container = await AstroContainer.create();
 	const html = await container.renderToString(About, {
 		props: { lang: 'fr' },
 	});
 
-	const titles = [...html.matchAll(/<h4[^>]*>([^<]*)<\/h4>/g)].map((match) =>
+	const titles = [...html.matchAll(/<h3[^>]*>([^<]*)<\/h3>/g)].map((match) =>
 		match[1].trim(),
 	);
-	expect(titles).toEqual(skillTitles.map((key) => ui.fr[key]));
+	expect(titles).toEqual(
+		skills.map((group) => ui.fr[`skills.${group.id}.title`]),
+	);
+	for (const item of skills.flatMap((group) => group.items)) {
+		expect(html).toMatch(new RegExp(`<li[^>]*>\\s*${item}\\s*</li>`));
+	}
 });

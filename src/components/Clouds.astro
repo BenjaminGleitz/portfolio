@@ -1,0 +1,41 @@
+---
+// Nuages décoratifs qui traversent lentement leur conteneur.
+// Le parent doit porter la classe @container (l'animation utilise 100cqw)
+// et overflow-hidden. Les délais négatifs répartissent les nuages dès l'arrivée.
+const clouds = [
+	{
+		width: 150,
+		height: 32,
+		top: '12%',
+		opacity: 0.75,
+		duration: 52,
+		delay: -12,
+	},
+	{ width: 96, height: 21, top: '5%', opacity: 0.55, duration: 68, delay: -44 },
+	{
+		width: 200,
+		height: 40,
+		top: '34%',
+		opacity: 0.5,
+		duration: 60,
+		delay: -30,
+	},
+	{ width: 76, height: 17, top: '24%', opacity: 0.6, duration: 76, delay: -6 },
+	{
+		width: 130,
+		height: 28,
+		top: '56%',
+		opacity: 0.45,
+		duration: 64,
+		delay: -52,
+	},
+];
+---
+
+{clouds.map((cloud) => (
+	<span
+		aria-hidden="true"
+		class="pointer-events-none absolute left-0 animate-drift rounded-full bg-white before:absolute before:bottom-1/4 before:left-[14%] before:h-[170%] before:w-[46%] before:rounded-full before:bg-inherit after:absolute after:right-[16%] after:bottom-1/4 after:h-[130%] after:w-[34%] after:rounded-full after:bg-inherit motion-reduce:[animation-play-state:paused]"
+		style={`width:${cloud.width}px;height:${cloud.height}px;top:${cloud.top};opacity:${cloud.opacity};animation-duration:${cloud.duration}s;animation-delay:${cloud.delay}s`}
+	/>
+))}
