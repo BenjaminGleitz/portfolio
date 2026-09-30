@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import photo from '../assets/photo-detouree-hero.png';
 import { profile } from '../data/profile';
 import type { ui } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
@@ -12,54 +14,127 @@ const t = useTranslations(lang);
 
 // La phrase reste entière dans ui.ts ; seul le nom (identique partout) y est injecté.
 const intro = t('hero.intro').replace('{name}', profile.name);
+const photoAlt = t('hero.photoAlt').replace('{name}', profile.name);
 const tagline = [...profile.mainStack, t('hero.available')];
+
+// Apparition en fondu décalé : chaque ligne part 110 ms après la précédente.
+// motion-safe: désactive l'effet si le visiteur a demandé moins d'animations.
+const reveal = 'motion-safe:animate-reveal';
 ---
 
 <header
 	id="home"
-	class="flex flex-col gap-2.5 px-6 pt-9 pb-16 md:h-[680px] md:justify-center md:gap-3.5 md:px-30 md:py-0"
+	class="relative overflow-hidden px-6 pt-9 md:px-gutter md:pt-20 xl:flex xl:h-[680px] xl:items-center xl:justify-between xl:gap-10 xl:pt-0"
 >
-	<p class="text-[38px] font-medium md:text-[60px] md:leading-[1.1]">
-		{t('hero.greeting')}
-		<span class="text-accent">.</span>
-	</p>
-
-	<h1 class="flex flex-col gap-2.5 md:gap-3.5">
-		<!-- Le trait accent déborde dans la marge gauche jusqu'au bord de la page. -->
-		<span class="-ml-6 flex items-center gap-3.5 md:-ml-30 md:gap-6">
-			<span class="h-0.5 w-11 shrink-0 bg-accent md:w-[150px]"></span>
-			<span class="text-2xl font-light md:text-[40px]">{intro}</span>
-		</span>
-		<span class="text-[36px] leading-[1.12] font-medium md:text-[68px] md:leading-[1.08] md:tracking-[-.01em]">
-			{t('hero.title')}
-		</span>
-	</h1>
-
-	<p class="mt-1 flex flex-wrap items-center gap-2 text-sm font-light text-muted md:mt-2.5 md:gap-3.5 md:text-[17px]">
-		{tagline.map((item, index) => (
-			<>
-				{index > 0 && (
-					<span class="text-accent" aria-hidden="true">
-						·
-					</span>
-				)}
-				<span>{item}</span>
-			</>
-		))}
-	</p>
-
-	<div class="mt-[22px] flex gap-3 text-sm font-medium md:mt-9 md:gap-4 md:text-[15px]">
-		<a
-			href="#projects"
-			class="flex-1 rounded bg-accent py-[15px] text-center text-bg transition duration-250 hover:-translate-y-0.5 hover:bg-accent-hover md:flex-none md:px-7 md:py-4"
+	<!-- Sur desktop, deux colonnes : le texte (640px max, le titre passe à la ligne) et la photo. -->
+	<div class="flex flex-col gap-2.5 md:gap-3.5 xl:max-w-[640px]">
+		<p
+			class:list={[
+				reveal,
+				'text-[38px] font-medium md:text-[60px] md:leading-[1.1]',
+			]}
 		>
-			{t('hero.cta.projects')}
-		</a>
-		<a
-			href={profile.cv}
-			class="flex-1 rounded border border-accent py-[14px] text-center transition-colors duration-250 hover:bg-accent/10 md:flex-none md:px-7 md:py-[15px]"
+			{t('hero.greeting')}
+			<span class="text-accent">.</span>
+		</p>
+
+		<h1 class="flex flex-col gap-2.5 md:gap-3.5">
+			<!-- Le trait accent déborde dans la marge gauche jusqu'au bord de la page. -->
+			<span
+				class:list={[
+					reveal,
+					'-ml-6 flex items-center gap-3.5 [animation-delay:110ms] md:-ml-gutter md:gap-6',
+				]}
+			>
+				<span class="h-0.5 w-11 shrink-0 bg-accent md:w-[calc(var(--spacing-gutter)+30px)]"></span>
+				<span class="text-2xl font-light md:text-[40px] xl:whitespace-nowrap">
+					{intro}
+				</span>
+			</span>
+			<span
+				class:list={[
+					reveal,
+					'text-[36px] leading-[1.12] font-medium [animation-delay:220ms] md:text-[68px] md:leading-[1.08] md:tracking-[-.01em]',
+				]}
+			>
+				{t('hero.title')}
+			</span>
+		</h1>
+
+		<p
+			class:list={[
+				reveal,
+				'mt-1 flex flex-wrap items-center gap-2 text-sm font-light text-muted [animation-delay:330ms] md:mt-2.5 md:gap-3.5 md:text-[17px]',
+			]}
 		>
-			{t('hero.cta.cv')}
-		</a>
+			{tagline.map((item, index) => (
+				<>
+					{index > 0 && (
+						<span class="text-accent" aria-hidden="true">
+							·
+						</span>
+					)}
+					<span>{item}</span>
+				</>
+			))}
+		</p>
+
+		<div
+			class:list={[
+				reveal,
+				'mt-[22px] flex gap-3 text-sm font-medium [animation-delay:440ms] md:mt-9 md:gap-4 md:text-[15px]',
+			]}
+		>
+			<a
+				href="#projects"
+				class="flex-1 rounded bg-accent py-[15px] text-center text-bg transition duration-250 hover:-translate-y-0.5 hover:bg-accent-hover md:flex-none md:px-7 md:py-4"
+			>
+				{t('hero.cta.projects')}
+			</a>
+			<a
+				href={profile.cv}
+				class="flex-1 rounded border border-accent py-[14px] text-center transition-colors duration-250 hover:bg-accent/10 md:flex-none md:px-7 md:py-[15px]"
+			>
+				{t('hero.cta.cv')}
+			</a>
+		</div>
+	</div>
+
+	<!--
+		Photo et décor : sous le texte en mobile/tablette, colonne de droite à partir de xl.
+		Tout est centré dans ce cadre ; la photo n'est visible qu'à l'intérieur de l'anneau.
+	-->
+	<div
+		class:list={[
+			reveal,
+			'relative mx-auto mt-6 h-[340px] w-full max-w-[342px] [animation-delay:220ms] xl:mx-0 xl:mt-0 xl:size-[520px] xl:max-w-none xl:shrink-0',
+		]}
+	>
+		<!-- Halo lumineux -->
+		<div class="absolute top-1/2 left-1/2 size-[420px] -translate-1/2 rounded-full bg-[radial-gradient(circle,rgba(92,184,255,.16)_0%,rgba(92,184,255,.05)_40%,rgba(92,184,255,0)_70%)] xl:size-[620px]"></div>
+
+		<div class="absolute top-1/2 left-1/2 size-[270px] -translate-1/2 xl:size-[420px]">
+			<!-- Photo découpée en cercle, juste à l'intérieur de l'anneau, cadrée sur le visage -->
+			<div class="absolute inset-[3px] overflow-hidden rounded-full">
+				<Image
+					src={photo}
+					alt={photoAlt}
+					widths={[260, 400, 520, 800]}
+					sizes="(min-width: 1280px) 400px, 260px"
+					priority
+					class="absolute top-[22px] left-1/2 w-[257px] max-w-none -translate-x-1/2 xl:top-[35px] xl:w-[400px]"
+				/>
+			</div>
+
+			<!--
+				Anneau qui tourne lentement : une traînée en dégradé derrière le point lumineux.
+				conic-gradient part du point (45°, en haut à droite) : transparent devant lui,
+				bleu plein juste derrière. Le masque radial ne garde qu'un trait de --ring d'épaisseur.
+			-->
+			<div class="absolute inset-0 drop-shadow-[0_0_10px_rgba(92,184,255,.45)] motion-safe:animate-spin-slow">
+				<div class="absolute inset-0 rounded-full bg-[conic-gradient(from_45deg,transparent_0%,transparent_15%,var(--color-accent)_100%)] [mask:radial-gradient(farthest-side,transparent_calc(100%_-_var(--ring)),#000_calc(100%_-_var(--ring)_+_1px))] [--ring:2px] xl:[--ring:3px]"></div>
+				<div class="absolute top-[34px] right-[34px] size-2.5 rounded-full bg-accent shadow-[0_0_12px_var(--color-accent)] xl:top-14 xl:right-14"></div>
+			</div>
+		</div>
 	</div>
 </header>
