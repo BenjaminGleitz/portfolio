@@ -1,0 +1,47 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Layout from '../layouts/Layout.astro';
+import { profile } from '../data/profile';
+import { useTranslations } from '../i18n/utils';
+
+// Une seule page 404 pour tout le site : on ne sait pas quelle langue le visiteur
+// cherchait, donc le message est affiché en français puis en anglais.
+const fr = useTranslations('fr');
+const en = useTranslations('en');
+---
+
+<Layout lang="fr" title={`404 — ${profile.name}`} noindex>
+	<main
+		id="main"
+		class="flex min-h-screen flex-col items-center justify-center gap-8 px-6 text-center"
+	>
+		<p class="text-[80px] leading-none font-medium lg:text-[120px]">
+			404<span class="text-accent">.</span>
+		</p>
+
+		<div class="flex flex-col gap-2">
+			<h1 class="text-2xl font-medium lg:text-3xl">{fr('notFound.title')}</h1>
+			<p class="font-light text-soft">{fr('notFound.text')}</p>
+		</div>
+		<div lang="en" class="flex flex-col gap-2">
+			<p class="text-lg font-medium text-muted">{en('notFound.title')}</p>
+			<p class="text-sm font-light text-muted">{en('notFound.text')}</p>
+		</div>
+
+		<div class="flex flex-wrap justify-center gap-4 text-sm font-medium">
+			<a
+				href={getRelativeLocaleUrl('fr')}
+				class="rounded bg-accent px-7 py-4 text-bg transition-colors duration-250 hover:bg-accent-hover"
+			>
+				{fr('notFound.back')}
+			</a>
+			<a
+				href={getRelativeLocaleUrl('en')}
+				lang="en"
+				class="rounded border border-accent px-7 py-[15px] transition-colors duration-250 hover:bg-accent/10"
+			>
+				{en('notFound.back')}
+			</a>
+		</div>
+	</main>
+</Layout>

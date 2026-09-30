@@ -1,14 +1,29 @@
 ---
 import '../styles/global.css';
+import { getAbsoluteLocaleUrl } from 'astro:i18n';
 import { profile } from '../data/profile';
-import type { ui } from '../i18n/ui';
+import { languages, type ui } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
 import { Font } from 'astro:assets';
 
 interface Props {
 	lang: keyof typeof ui;
+	// Titre de l'onglet ; par défaut « Nom — Développeur web junior ».
+	title?: string;
+	// Pages à ne pas référencer (404) : pas de canonical ni d'hreflang.
+	noindex?: boolean;
 }
 
-const { lang } = Astro.props;
+const { lang, noindex = false } = Astro.props;
+const t = useTranslations(lang);
+
+const title = Astro.props.title ?? `${profile.name} — ${t('hero.title')}`;
+const description = t('meta.description');
+const locales = Object.keys(languages) as (keyof typeof languages)[];
+// Format des locales Open Graph : fr_FR, en_US.
+const ogLocale = { fr: 'fr_FR', en: 'en_US' } as const;
+const canonical = getAbsoluteLocaleUrl(lang);
+const ogImage = new URL('/og.png', Astro.site).href;
 ---
 
 <!doctype html>
@@ -17,12 +32,55 @@ const { lang } = Astro.props;
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<meta name="theme-color" content="#12161d" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{profile.name}</title>
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		{noindex ? (
+			<meta name="robots" content="noindex" />
+		) : (
+			<>
+				<link rel="canonical" href={canonical} />
+				{/* Indique aux moteurs de recherche les versions de la page dans chaque langue. */}
+				{locales.map((locale) => (
+					<link
+						rel="alternate"
+						hreflang={locale}
+						href={getAbsoluteLocaleUrl(locale)}
+					/>
+				))}
+				<link
+					rel="alternate"
+					hreflang="x-default"
+					href={getAbsoluteLocaleUrl('fr')}
+				/>
+				<link rel="sitemap" href="/sitemap-index.xml" />
+			</>
+		)}
+
+		<!-- Aperçu lors d'un partage (LinkedIn, messageries…) -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:locale" content={ogLocale[lang]} />
+		<meta name="twitter:card" content="summary_large_image" />
+
 		<Font cssVariable="--font-montserrat" preload={true} />
 	</head>
 	<body class="bg-bg text-text antialiased">
+		<!-- Invisible jusqu'à ce qu'on arrive dessus au clavier (Tab) -->
+		<a
+			href="#main"
+			class="sr-only rounded bg-accent font-medium text-bg focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2"
+		>
+			{t('a11y.skip')}
+		</a>
 		<slot />
 	</body>
 </html>

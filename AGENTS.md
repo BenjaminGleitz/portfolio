@@ -1,8 +1,10 @@
 ## Project status
 
-Personal portfolio site (Astro 7, Node >= 22.12), bilingual FR/EN. Pages `src/pages/index.astro` (fr, `/`) and `src/pages/en/index.astro` (en, `/en/`) are identical: each resolves its language with `getLang(Astro.currentLocale)` and passes it as the `lang` prop to `Layout` and every section component, which call `useTranslations(lang)` from `src/i18n/utils.ts`.
+Personal portfolio site (Astro 7, Node >= 22.12), bilingual FR/EN, one page per language. Pages `src/pages/index.astro` (fr, `/`) and `src/pages/en/index.astro` (en, `/en/`) are identical: each resolves its language with `getLang(Astro.currentLocale)` and passes it as the `lang` prop to `Layout` and every section component (`Nav`, then `Hero`, `TechBand`, `About`, `Projects`, `Contact` inside `<main id="main">`, then `Footer`), which call `useTranslations(lang)` from `src/i18n/utils.ts`. `src/pages/404.astro` is a single bilingual, `noindex` page.
 
-`astro.config.mjs` configures i18n routing (`fr` default, unprefixed) and Tailwind CSS v4 via the `@tailwindcss/vite` plugin; the stylesheet is `src/styles/global.css` (`@import 'tailwindcss'`, theme tokens in `@theme`), imported once in `Layout.astro`. No content collections yet. Fully static output, no database.
+`astro.config.mjs` sets `site` (`https://benjamin-gleitz.com`, used for canonical, hreflang, Open Graph and sitemap URLs), i18n routing (`fr` default, unprefixed), the `@astrojs/sitemap` integration and Tailwind CSS v4 via the `@tailwindcss/vite` plugin. `Layout.astro` holds the `<head>` (title, description, canonical, hreflang, Open Graph with `public/og.png`) and the skip link. The stylesheet is `src/styles/global.css` (`@import 'tailwindcss'`, theme tokens and keyframes in `@theme`, base focus/scroll styles), imported once in `Layout.astro`. Sections use `md:px-gutter` (a theme spacing that caps content at 1200px), not a fixed padding. Content data lives in `src/data/` (`profile.ts`, `projects.ts`). No content collections. Fully static output, no database.
+
+Tests that render `Layout` (or a page using it) must pass `astroConfig: { site }` to `AstroContainer.create()`, since the container does not read `astro.config.mjs`.
 
 ## Development
 
