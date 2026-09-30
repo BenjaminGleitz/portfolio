@@ -1,5 +1,5 @@
 ---
-import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
 import Nav from '../components/Nav.astro';
 import Layout from '../layouts/Layout.astro';
 import { getLang } from '../i18n/utils.ts';
@@ -9,5 +9,5 @@ const lang = getLang(Astro.currentLocale);
 
 <Layout lang={lang}>
 	<Nav lang={lang} />
-	<Header lang={lang} />
+	<Hero lang={lang} />
 </Layout>

@@ -1,0 +1,65 @@
+---
+import { profile } from '../data/profile';
+import type { ui } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+	lang: keyof typeof ui;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// La phrase reste entière dans ui.ts ; seul le nom (identique partout) y est injecté.
+const intro = t('hero.intro').replace('{name}', profile.name);
+const tagline = [...profile.mainStack, t('hero.available')];
+---
+
+<header
+	id="home"
+	class="flex flex-col gap-2.5 px-6 pt-9 pb-16 md:h-[680px] md:justify-center md:gap-3.5 md:px-30 md:py-0"
+>
+	<p class="text-[38px] font-medium md:text-[60px] md:leading-[1.1]">
+		{t('hero.greeting')}
+		<span class="text-accent">.</span>
+	</p>
+
+	<h1 class="flex flex-col gap-2.5 md:gap-3.5">
+		<!-- Le trait accent déborde dans la marge gauche jusqu'au bord de la page. -->
+		<span class="-ml-6 flex items-center gap-3.5 md:-ml-30 md:gap-6">
+			<span class="h-0.5 w-11 shrink-0 bg-accent md:w-[150px]"></span>
+			<span class="text-2xl font-light md:text-[40px]">{intro}</span>
+		</span>
+		<span class="text-[36px] leading-[1.12] font-medium md:text-[68px] md:leading-[1.08] md:tracking-[-.01em]">
+			{t('hero.title')}
+		</span>
+	</h1>
+
+	<p class="mt-1 flex flex-wrap items-center gap-2 text-sm font-light text-muted md:mt-2.5 md:gap-3.5 md:text-[17px]">
+		{tagline.map((item, index) => (
+			<>
+				{index > 0 && (
+					<span class="text-accent" aria-hidden="true">
+						·
+					</span>
+				)}
+				<span>{item}</span>
+			</>
+		))}
+	</p>
+
+	<div class="mt-[22px] flex gap-3 text-sm font-medium md:mt-9 md:gap-4 md:text-[15px]">
+		<a
+			href="#projects"
+			class="flex-1 rounded bg-accent py-[15px] text-center text-bg transition duration-250 hover:-translate-y-0.5 hover:bg-accent-hover md:flex-none md:px-7 md:py-4"
+		>
+			{t('hero.cta.projects')}
+		</a>
+		<a
+			href={profile.cv}
+			class="flex-1 rounded border border-accent py-[14px] text-center transition-colors duration-250 hover:bg-accent/10 md:flex-none md:px-7 md:py-[15px]"
+		>
+			{t('hero.cta.cv')}
+		</a>
+	</div>
+</header>

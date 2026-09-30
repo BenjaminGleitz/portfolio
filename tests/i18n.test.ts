@@ -22,6 +22,6 @@ test('every translation key exists in every language', () => {
 });
 
 test('useTranslations returns text in the requested language', () => {
-	expect(useTranslations('en')('header.goal')).toBe(ui.en['header.goal']);
-	expect(useTranslations('fr')('header.goal')).toBe(ui.fr['header.goal']);
+	expect(useTranslations('en')('hero.available')).toBe(ui.en['hero.available']);
+	expect(useTranslations('fr')('hero.available')).toBe(ui.fr['hero.available']);
 });
