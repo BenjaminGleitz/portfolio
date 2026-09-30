@@ -1,6 +1,7 @@
 ---
 import About from '../components/About.astro';
 import Hero from '../components/Hero.astro';
+import Projects from '../components/Projects.astro';
 import TechBand from '../components/TechBand.astro';
 import Nav from '../components/Nav.astro';
 import Layout from '../layouts/Layout.astro';
@@ -14,4 +15,5 @@ const lang = getLang(Astro.currentLocale);
 	<Hero lang={lang} />
 	<TechBand lang={lang} />
 	<About lang={lang} />
+	<Projects lang={lang} />
 </Layout>

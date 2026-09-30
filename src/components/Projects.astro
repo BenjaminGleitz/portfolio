@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets';
+import { projects } from '../data/projects';
+import type { ui } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+	lang: keyof typeof ui;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section
+	id="projects"
+	aria-labelledby="projects-title"
+	class="px-6 pt-10 pb-[30px] md:px-gutter lg:pb-[110px]"
+>
+	<!-- Titre centré, prolongé par un trait vertical terminé par un point -->
+	<div class="mb-[30px] flex flex-col items-center gap-4 lg:mb-[60px] lg:gap-[22px]">
+		<h2 id="projects-title" class="text-[32px] font-medium lg:text-[52px]">
+			{t('projects.title')}
+		</h2>
+		<div class="flex flex-col items-center gap-1.5" aria-hidden="true">
+			<span class="h-[30px] w-px bg-accent lg:h-11"></span>
+			<span class="size-1.5 rounded-full bg-accent"></span>
+		</div>
+	</div>
+
+	<ol>
+		{projects.map((project, index) => {
+			// Une ligne sur deux, l'image passe à gauche et le cadre décalé part de l'autre côté.
+			const reversed = index % 2 === 1;
+			const title = t(`projects.${project.id}.title`);
+			return (
+				<li
+					class:list={[
+						'flex flex-col gap-[18px] pt-[30px] pb-10 lg:flex-row lg:items-center lg:gap-16 lg:py-[60px] xl:gap-[110px]',
+						{ 'lg:flex-row-reverse': reversed },
+					]}
+				>
+					<div class="flex flex-1 flex-col gap-[18px] lg:gap-[22px]">
+						<p
+							class="hidden text-[13px] font-medium tracking-[.1em] text-accent lg:block"
+							aria-hidden="true"
+						>
+							{String(index + 1).padStart(2, '0')}
+						</p>
+						<h3 class="mt-2 text-[22px] font-medium lg:mt-0 lg:text-[30px]">
+							{title}
+						</h3>
+						<ul class="flex flex-wrap gap-1.5 lg:gap-2">
+							{project.tags.map((tag) => (
+								<li class="rounded-full bg-chip px-3 py-[5px] text-[11px] text-soft lg:px-3.5 lg:py-1.5 lg:text-xs">
+									{tag}
+								</li>
+							))}
+						</ul>
+						<p class="text-sm leading-[1.75] font-light text-pretty text-muted lg:text-[15px] lg:leading-[1.8]">
+							{t(`projects.${project.id}.desc`)}
+						</p>
+						<div class="flex gap-3 text-sm font-medium lg:mt-2.5 lg:items-center lg:gap-7">
+							{project.repo && (
+								<a
+									href={project.repo}
+									target="_blank"
+									rel="noreferrer"
+									class="flex-1 rounded bg-accent py-[14px] text-center text-bg transition-colors duration-250 hover:bg-accent-hover lg:flex-none lg:px-[22px] lg:py-[13px]"
+								>
+									{t('projects.code')}
+								</a>
+							)}
+							{project.demo && (
+								<a
+									href={project.demo}
+									target="_blank"
+									rel="noreferrer"
+									class="flex-1 rounded border border-line py-[13px] text-center lg:flex-none lg:rounded-none lg:border-0 lg:bg-[linear-gradient(var(--color-accent),var(--color-accent))] lg:bg-size-[30%_1px] lg:bg-bottom-left lg:bg-no-repeat lg:py-0 lg:pb-[5px] lg:transition-[background-size] lg:duration-350 lg:hover:bg-size-[100%_1px]"
+								>
+									{t('projects.demo')} <span aria-hidden="true">↗</span>
+								</a>
+							)}
+						</div>
+					</div>
+
+					<!-- Visuel : capture dans un cadre, doublé d'un contour décalé qui s'écarte au survol -->
+					<div class="group relative order-first mr-3.5 aspect-16/10 lg:order-none lg:mr-0 lg:flex-1">
+						<div
+							class:list={[
+								'absolute inset-0 rounded border border-accent/45 transition-transform duration-500 ease-[cubic-bezier(.2,.7,.2,1)]',
+								'translate-x-3 -translate-y-3 lg:-translate-y-5 lg:group-hover:-translate-y-[34px]',
+								reversed
+									? 'lg:-translate-x-5 lg:group-hover:-translate-x-[34px]'
+									: 'lg:translate-x-5 lg:group-hover:translate-x-[34px]',
+							]}
+						/>
+						<div class="absolute inset-0 flex items-center justify-center overflow-hidden rounded bg-surface lg:shadow-[0_20px_50px_rgba(0,0,0,.35)]">
+							{project.image ? (
+								<Image
+									src={project.image}
+									alt={title}
+									widths={[400, 700, 1000]}
+									sizes="(min-width: 1024px) 50vw, 100vw"
+									class="size-full object-cover object-top"
+								/>
+							) : (
+								<span class="text-xs tracking-[.1em] text-subtle uppercase">
+									{t('projects.placeholder')}
+								</span>
+							)}
+						</div>
+					</div>
+				</li>
+			);
+		})}
+	</ol>
+</section>
