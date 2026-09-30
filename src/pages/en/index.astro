@@ -2,6 +2,7 @@
 import Hero from '../../components/Hero.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getLang } from '../../i18n/utils.ts';
+import TechBand from '../../components/TechBand.astro';
 import Nav from '../../components/Nav.astro';
 
 const lang = getLang(Astro.currentLocale);
@@ -10,4 +11,5 @@ const lang = getLang(Astro.currentLocale);
 <Layout lang={lang}>
 	<Nav lang={lang} />
 	<Hero lang={lang} />
+	<TechBand lang={lang} />
 </Layout>
