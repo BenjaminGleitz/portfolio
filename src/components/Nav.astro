@@ -22,16 +22,15 @@ const links = [
 const locales = Object.keys(languages) as (keyof typeof languages)[];
 ---
 
-<div class="relative flex h-18 items-center justify-between px-6 md:h-24 md:px-gutter">
-	<a
-		href="#home"
-		class="text-[18px] font-medium tracking-[.01em] md:text-[21px]"
-	>
+<!-- Posée par-dessus le ciel du hero, qui réserve la place en haut. -->
+<div class="absolute inset-x-0 top-0 z-20 flex h-18 items-center justify-between px-6 text-night md:h-24 md:px-gutter">
+	<a href="#home" class="font-mono text-[15px] font-medium md:text-base">
 		{profile.name}
-		<span class="text-accent">.</span>
+		<span class="text-white">.</span>
 	</a>
 
-	<div class="flex items-center gap-3.5 md:gap-12">
+	<!-- Sur desktop, liens et langues partagent une pilule en verre. -->
+	<div class="flex items-center gap-3.5 md:gap-6 md:rounded-full md:border md:border-white/80 md:bg-white/55 md:py-1.5 md:pr-1.5 md:pl-6 md:backdrop-blur-md">
 		<!-- Sur mobile, le menu passe après FR/EN (order-last) comme sur la maquette. -->
 		<nav aria-label={t('nav.label')} class="order-last md:order-none">
 			<!-- Le bouton est le "peer" : la liste s'affiche quand il porte aria-expanded="true". -->
@@ -43,20 +42,20 @@ const locales = Object.keys(languages) as (keyof typeof languages)[];
 				aria-controls="nav-menu"
 				data-nav-toggle
 			>
-				<span class="block h-[1.5px] w-[22px] bg-text"></span>
-				<span class="block h-[1.5px] w-[22px] bg-text"></span>
-				<span class="block h-[1.5px] w-[22px] bg-text"></span>
+				<span class="block h-[1.5px] w-[22px] bg-night"></span>
+				<span class="block h-[1.5px] w-[22px] bg-night"></span>
+				<span class="block h-[1.5px] w-[22px] bg-night"></span>
 			</button>
 
 			<ul
 				id="nav-menu"
-				class="absolute inset-x-0 top-full z-10 hidden flex-col gap-6 border-b border-line bg-bg px-6 py-8 text-base peer-aria-expanded:flex md:static md:flex md:flex-row md:gap-10 md:border-0 md:bg-transparent md:p-0 md:text-sm"
+				class="absolute inset-x-4 top-full z-10 hidden flex-col gap-6 rounded-3xl border border-white/80 bg-cream/95 px-6 py-7 text-base shadow-[0_20px_40px_-20px_rgba(28,34,56,.4)] backdrop-blur-md peer-aria-expanded:flex md:static md:flex md:flex-row md:gap-6 md:rounded-none md:border-0 md:bg-transparent md:p-0 md:text-sm md:shadow-none md:backdrop-blur-none"
 			>
 				{links.map((link) => (
 					<li>
 						<a
 							href={link.href}
-							class="relative pb-1.5 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-350 after:ease-out hover:after:scale-x-100 focus-visible:after:scale-x-100"
+							class="relative pb-1 text-night/80 transition-colors after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-night after:transition-transform after:duration-350 after:ease-out hover:text-night hover:after:scale-x-100 focus-visible:after:scale-x-100"
 						>
 							{t(link.key)}
 						</a>
@@ -65,7 +64,7 @@ const locales = Object.keys(languages) as (keyof typeof languages)[];
 			</ul>
 		</nav>
 
-		<ul class="flex rounded-full border border-line p-[3px] text-xs font-medium">
+		<ul class="flex rounded-full border border-white/80 bg-white/55 p-[3px] text-xs font-medium backdrop-blur-md md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
 			{locales.map((locale) => (
 				<li>
 					<a
@@ -74,7 +73,7 @@ const locales = Object.keys(languages) as (keyof typeof languages)[];
 						lang={locale}
 						aria-label={languages[locale]}
 						aria-current={locale === lang ? 'page' : undefined}
-						class="block rounded-full px-[11px] py-[5px] text-muted transition-colors hover:text-text aria-[current=page]:bg-accent aria-[current=page]:text-bg"
+						class="block rounded-full px-3 py-[5px] text-night/70 transition-colors hover:text-night aria-[current=page]:bg-night aria-[current=page]:text-cream"
 					>
 						{locale.toUpperCase()}
 					</a>

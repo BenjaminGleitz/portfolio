@@ -21,10 +21,25 @@ export default defineConfig({
 	fonts: [
 		{
 			provider: fontProviders.google(),
-			name: 'Montserrat',
-			cssVariable: '--font-montserrat',
-			weights: [300, 400, 500],
+			name: 'Hanken Grotesk',
+			cssVariable: '--font-hanken',
+			weights: [300, 400, 500, 600],
 			fallbacks: ['sans-serif'],
+		},
+		{
+			provider: fontProviders.google(),
+			name: 'JetBrains Mono',
+			cssVariable: '--font-jetbrains',
+			weights: [400, 500],
+			fallbacks: ['monospace'],
+		},
+		{
+			provider: fontProviders.google(),
+			name: 'Instrument Serif',
+			cssVariable: '--font-instrument',
+			weights: [400],
+			styles: ['italic'],
+			fallbacks: ['serif'],
 		},
 	],
 

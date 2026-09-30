@@ -7,12 +7,16 @@ export const defaultLang = 'fr';
 
 export const ui = {
 	fr: {
-		'hero.greeting': 'Bonjour',
-		'hero.intro': 'Je suis {name}',
-		'hero.title': 'Développeur web junior',
+		'meta.role': 'Développeur web junior',
+		'hero.intro': 'Bonjour, je suis {name}',
+		'hero.title': 'Développeur web',
+		'hero.titleAccent': 'junior & curieux',
+		'hero.lead':
+			'Je construis des applis web simples, solides et bien testées.',
 		'hero.available': 'Ouvert aux opportunités',
 		'hero.cta.projects': 'Voir mes projets',
 		'hero.cta.cv': 'Mon CV',
+		'hero.cta.contact': 'Me contacter',
 		'hero.photoAlt': 'Portrait de {name}',
 		'techBand.label': 'Technologies que j’utilise',
 		'about.title': 'À propos',
@@ -68,12 +72,15 @@ export const ui = {
 		'nav.menu': 'Menu',
 	},
 	en: {
-		'hero.greeting': 'Hello',
-		'hero.intro': "I'm {name}",
-		'hero.title': 'Junior Web Developer',
+		'meta.role': 'Junior Web Developer',
+		'hero.intro': "Hi, I'm {name}",
+		'hero.title': 'Web developer',
+		'hero.titleAccent': 'junior & curious',
+		'hero.lead': 'I build simple, solid, well-tested web apps.',
 		'hero.available': 'Open to opportunities',
 		'hero.cta.projects': 'See my projects',
 		'hero.cta.cv': 'My résumé',
+		'hero.cta.contact': 'Contact me',
 		'hero.photoAlt': 'Portrait of {name}',
 		'techBand.label': 'Technologies I use',
 		'about.title': 'About',

@@ -17,7 +17,7 @@ interface Props {
 const { lang, noindex = false } = Astro.props;
 const t = useTranslations(lang);
 
-const title = Astro.props.title ?? `${profile.name} — ${t('hero.title')}`;
+const title = Astro.props.title ?? `${profile.name} — ${t('meta.role')}`;
 const description = t('meta.description');
 const locales = Object.keys(languages) as (keyof typeof languages)[];
 // Format des locales Open Graph : fr_FR, en_US.
@@ -33,7 +33,7 @@ const ogImage = new URL('/og.png', Astro.site).href;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-		<meta name="theme-color" content="#12161d" />
+		<meta name="theme-color" content="#6fa8d6" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
@@ -71,13 +71,15 @@ const ogImage = new URL('/og.png', Astro.site).href;
 		<meta property="og:locale" content={ogLocale[lang]} />
 		<meta name="twitter:card" content="summary_large_image" />
 
-		<Font cssVariable="--font-montserrat" preload={true} />
+		<Font cssVariable="--font-hanken" preload={true} />
+		<Font cssVariable="--font-jetbrains" preload={true} />
+		<Font cssVariable="--font-instrument" preload={true} />
 	</head>
 	<body class="bg-bg text-text antialiased">
 		<!-- Invisible jusqu'à ce qu'on arrive dessus au clavier (Tab) -->
 		<a
 			href="#main"
-			class="sr-only rounded bg-accent font-medium text-bg focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2"
+			class="sr-only rounded bg-night font-medium text-cream focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2"
 		>
 			{t('a11y.skip')}
 		</a>

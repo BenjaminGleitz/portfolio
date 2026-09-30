@@ -1,7 +1,7 @@
 export const profile = {
 	name: 'Benjamin Gleitz',
 	// Technologies mises en avant sous le titre du hero.
-	mainStack: ['Symfony'],
+	mainStack: ['PHP', 'Symfony', 'MySQL', 'Docker'],
 	// PDF à déposer dans public/ (servi tel quel à la racine du site).
 	cv: '/cv.pdf',
 	email: 'gleitz.benjamin.pro@gmail.com',

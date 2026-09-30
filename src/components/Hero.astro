@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import photo from '../assets/photo-detouree-hero.png';
+import Clouds from './Clouds.astro';
 import { profile } from '../data/profile';
 import type { ui } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
@@ -15,125 +16,132 @@ const t = useTranslations(lang);
 // La phrase reste entière dans ui.ts ; seul le nom (identique partout) y est injecté.
 const intro = t('hero.intro').replace('{name}', profile.name);
 const photoAlt = t('hero.photoAlt').replace('{name}', profile.name);
-const tagline = [...profile.mainStack, t('hero.available')];
 
 // Apparition en fondu décalé : chaque ligne part 110 ms après la précédente.
 // motion-safe: désactive l'effet si le visiteur a demandé moins d'animations.
 const reveal = 'motion-safe:animate-reveal';
+const button =
+	'inline-flex items-center rounded-full px-5 py-3 text-[15px] font-medium transition duration-200 hover:-translate-y-0.5';
+const glassButton = `${button} border border-white/90 bg-white/60 backdrop-blur-sm hover:bg-white/85`;
 ---
 
+<!--
+	Le ciel de jour : dégradé bleu → rose → pêche, nuages en arrière-plan.
+	pt-18 / md:pt-24 laissent la place à la nav posée par-dessus.
+-->
 <header
 	id="home"
-	class="relative overflow-hidden px-6 pt-9 md:px-gutter md:pt-20 xl:flex xl:h-[680px] xl:items-center xl:justify-between xl:gap-10 xl:pt-0"
+	class="@container relative overflow-hidden bg-[linear-gradient(180deg,var(--color-sky-1)_0%,var(--color-sky-2)_34%,var(--color-sky-3)_64%,var(--color-sky-4)_86%,var(--color-sky-5)_100%)] pt-18 text-night md:pt-24"
 >
-	<!-- Sur desktop, deux colonnes : le texte (640px max, le titre passe à la ligne) et la photo. -->
-	<div class="flex flex-col gap-2.5 md:gap-3.5 xl:max-w-[640px]">
-		<p
-			class:list={[
-				reveal,
-				'text-[38px] font-medium md:text-[60px] md:leading-[1.1]',
-			]}
-		>
-			{t('hero.greeting')}
-			<span class="text-accent">.</span>
-		</p>
+	<Clouds />
 
-		<h1 class="flex flex-col gap-2.5 md:gap-3.5">
-			<!-- Le trait accent déborde dans la marge gauche jusqu'au bord de la page. -->
-			<span
+	<div class="relative z-10 grid px-6 md:px-gutter xl:min-h-[600px] xl:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] xl:items-center xl:gap-6">
+		<div class="flex flex-col gap-3.5 pt-8 pb-6 md:pt-12 xl:py-16">
+			<p
 				class:list={[
 					reveal,
-					'-ml-6 flex items-center gap-3.5 [animation-delay:110ms] md:-ml-gutter md:gap-6',
+					'inline-flex items-center gap-2 self-start rounded-full bg-white/60 px-3.5 py-1 text-[13px]',
 				]}
 			>
-				<span class="h-0.5 w-11 shrink-0 bg-accent md:w-[calc(var(--spacing-gutter)+30px)]"></span>
-				<span class="text-2xl font-light md:text-[40px] xl:whitespace-nowrap">
+				<span
+					class="size-[7px] rounded-full bg-status shadow-[0_0_0_3px_rgba(47,148,103,.18)]"
+					aria-hidden="true"
+				></span>
+				{t('hero.available')}
+			</p>
+
+			<h1 class="flex flex-col gap-1">
+				<span
+					class:list={[
+						reveal,
+						'text-base text-night/80 [animation-delay:110ms] md:text-lg',
+					]}
+				>
 					{intro}
 				</span>
-			</span>
-			<span
+				<span
+					class:list={[
+						reveal,
+						'font-mono text-[34px] leading-[1.08] tracking-[-.02em] [animation-delay:220ms] md:text-[56px] xl:text-[64px]',
+					]}
+				>
+					{t('hero.title')}
+				</span>
+				<span
+					class:list={[
+						reveal,
+						'font-serif text-[42px] leading-none italic [animation-delay:220ms] md:text-[72px] xl:text-[82px]',
+					]}
+				>
+					{t('hero.titleAccent')}
+				</span>
+			</h1>
+
+			<p
 				class:list={[
 					reveal,
-					'text-[36px] leading-[1.12] font-medium [animation-delay:220ms] md:text-[68px] md:leading-[1.08] md:tracking-[-.01em]',
+					'mt-1.5 max-w-[34ch] text-[17px] font-light [animation-delay:330ms] md:text-lg',
 				]}
 			>
-				{t('hero.title')}
-			</span>
-		</h1>
+				{t('hero.lead')}
+			</p>
+			<p
+				class:list={[
+					reveal,
+					'font-mono text-[13px] text-night/65 [animation-delay:330ms]',
+				]}
+			>
+				{profile.mainStack.join(' · ')}
+			</p>
 
-		<p
-			class:list={[
-				reveal,
-				'mt-1 flex flex-wrap items-center gap-2 text-sm font-light text-muted [animation-delay:330ms] md:mt-2.5 md:gap-3.5 md:text-[17px]',
-			]}
-		>
-			{tagline.map((item, index) => (
-				<>
-					{index > 0 && (
-						<span class="text-accent" aria-hidden="true">
-							·
-						</span>
-					)}
-					<span>{item}</span>
-				</>
-			))}
-		</p>
+			<div
+				class:list={[
+					reveal,
+					'mt-3.5 flex flex-wrap gap-2.5 [animation-delay:440ms]',
+				]}
+			>
+				<a href="#projects" class={`${button} bg-night text-cream`}>
+					{t('hero.cta.projects')}
+				</a>
+				<a href={profile.cv} class={glassButton}>
+					{t('hero.cta.cv')}
+				</a>
+				<a href="#contact" class={glassButton}>
+					{t('hero.cta.contact')}
+				</a>
+			</div>
+		</div>
 
+		<!-- Portrait dans un cercle, entouré d'un anneau-comète blanc (pas de halo derrière la tête). -->
 		<div
 			class:list={[
 				reveal,
-				'mt-[22px] flex gap-3 text-sm font-medium [animation-delay:440ms] md:mt-9 md:gap-4 md:text-[15px]',
+				'relative mx-auto mt-4 mb-12 size-[230px] [animation-delay:220ms] xl:my-0 xl:size-[320px]',
 			]}
 		>
-			<a
-				href="#projects"
-				class="flex-1 rounded bg-accent py-[15px] text-center text-bg transition duration-250 hover:-translate-y-0.5 hover:bg-accent-hover md:flex-none md:px-7 md:py-4"
-			>
-				{t('hero.cta.projects')}
-			</a>
-			<a
-				href={profile.cv}
-				class="flex-1 rounded border border-accent py-[14px] text-center transition-colors duration-250 hover:bg-accent/10 md:flex-none md:px-7 md:py-[15px]"
-			>
-				{t('hero.cta.cv')}
-			</a>
-		</div>
-	</div>
-
-	<!--
-		Photo et décor : sous le texte en mobile/tablette, colonne de droite à partir de xl.
-		Tout est centré dans ce cadre ; la photo n'est visible qu'à l'intérieur de l'anneau.
-	-->
-	<div
-		class:list={[
-			reveal,
-			'relative mx-auto mt-6 h-[340px] w-full max-w-[342px] [animation-delay:220ms] xl:mx-0 xl:mt-0 xl:size-[520px] xl:max-w-none xl:shrink-0',
-		]}
-	>
-		<!-- Halo lumineux -->
-		<div class="absolute top-1/2 left-1/2 size-[420px] -translate-1/2 rounded-full bg-[radial-gradient(circle,rgba(92,184,255,.16)_0%,rgba(92,184,255,.05)_40%,rgba(92,184,255,0)_70%)] xl:size-[620px]"></div>
-
-		<div class="absolute top-1/2 left-1/2 size-[270px] -translate-1/2 xl:size-[420px]">
-			<!-- Photo découpée en cercle, juste à l'intérieur de l'anneau, cadrée sur le visage -->
-			<div class="absolute inset-[3px] overflow-hidden rounded-full">
+			<div class="absolute inset-1.5 overflow-hidden rounded-full bg-cream shadow-[0_20px_40px_-18px_rgba(28,34,56,.45)]">
 				<Image
 					src={photo}
 					alt={photoAlt}
-					widths={[260, 400, 520, 800]}
-					sizes="(min-width: 1280px) 400px, 260px"
+					widths={[220, 300, 440, 600]}
+					sizes="(min-width: 1280px) 300px, 220px"
 					priority
-					class="absolute top-[22px] left-1/2 w-[257px] max-w-none -translate-x-1/2 xl:top-[35px] xl:w-[400px]"
+					class="absolute top-6 left-1/2 w-[96%] max-w-none -translate-x-1/2 xl:top-[34px]"
 				/>
 			</div>
 
 			<!--
-				Anneau qui tourne lentement : une traînée en dégradé derrière le point lumineux.
+				Anneau qui tourne lentement : une traînée blanche derrière le point lumineux.
 				conic-gradient part du point (45°, en haut à droite) : transparent devant lui,
-				bleu plein juste derrière. Le masque radial ne garde qu'un trait de --ring d'épaisseur.
+				blanc plein juste derrière. Le masque radial ne garde qu'un trait de 3px.
 			-->
-			<div class="absolute inset-0 drop-shadow-[0_0_10px_rgba(92,184,255,.45)] motion-safe:animate-spin-slow">
-				<div class="absolute inset-0 rounded-full bg-[conic-gradient(from_45deg,transparent_0%,transparent_15%,var(--color-accent)_100%)] [mask:radial-gradient(farthest-side,transparent_calc(100%_-_var(--ring)),#000_calc(100%_-_var(--ring)_+_1px))] [--ring:2px] xl:[--ring:3px]"></div>
-				<div class="absolute top-[34px] right-[34px] size-2.5 rounded-full bg-accent shadow-[0_0_12px_var(--color-accent)] xl:top-14 xl:right-14"></div>
+			<div
+				class="absolute inset-0 drop-shadow-[0_0_8px_rgba(255,255,255,.7)] motion-safe:animate-spin-slow"
+				aria-hidden="true"
+			>
+				<div class="absolute -inset-2.5 rounded-full bg-[conic-gradient(from_45deg,transparent_0%,transparent_15%,#fff_100%)] [mask:radial-gradient(farthest-side,transparent_calc(100%_-_3px),#000_calc(100%_-_2px))]"></div>
+				<!-- Posé sur l'anneau à 45° : 14,6 % du côté moins le débord de l'anneau et le rayon du point. -->
+				<div class="absolute top-[calc(14.6%-12.5px)] right-[calc(14.6%-12.5px)] size-[11px] rounded-full bg-white shadow-[0_0_12px_#fff]"></div>
 			</div>
 		</div>
 	</div>

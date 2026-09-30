@@ -1,6 +1,24 @@
 @import 'tailwindcss';
 
 @theme {
+	/*
+	 * Palette « au fil d'une journée » : ciel de jour → coucher de soleil → nuit.
+	 * Référence : docs/design/portfolio-ciel.html
+	 */
+	--color-night: #1c2238;
+	--color-sky-1: #6fa8d6;
+	--color-sky-2: #a9c4e4;
+	--color-sky-3: #d9c3de;
+	--color-sky-4: #f1c6c0;
+	--color-sky-5: #f6d5c0;
+	--color-cream: #fbf6f1;
+	--color-dusk: #7f6fa8;
+	--color-ink-soft: #4a4f63;
+	--color-sand: #ece3da;
+	--color-chip-light: #f3ece6;
+	--color-status: #2f9467;
+
+	/* Ancien thème sombre : encore utilisé par les sections pas encore restylées. */
 	/* Fonds */
 	--color-bg: #12161d;
 	--color-surface: #181d26;
@@ -31,10 +49,32 @@
 	/* Animations du hero */
 	--animate-spin-slow: spin-slow 38s linear infinite;
 	--animate-reveal: reveal 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	--animate-drift: drift linear infinite;
+	--animate-twinkle: twinkle 4s ease-in-out infinite alternate;
 
 	@keyframes spin-slow {
 		to {
 			transform: rotate(360deg);
+		}
+	}
+
+	/* Nuages : traversent leur conteneur (100cqw = largeur du conteneur @container). */
+	@keyframes drift {
+		from {
+			transform: translateX(-260px);
+		}
+		to {
+			transform: translateX(calc(100cqw + 40px));
+		}
+	}
+
+	/* Étoiles : scintillement doux. */
+	@keyframes twinkle {
+		from {
+			opacity: 0.15;
+		}
+		to {
+			opacity: 0.7;
 		}
 	}
 
@@ -49,13 +89,18 @@
 
 @theme inline {
 	/*noinspection CssUnresolvedCustomProperty*/
-	--font-sans: var(--font-montserrat);
+	--font-sans: var(--font-hanken);
+	/*noinspection CssUnresolvedCustomProperty*/
+	--font-mono: var(--font-jetbrains);
+	/*noinspection CssUnresolvedCustomProperty*/
+	--font-serif: var(--font-instrument);
 }
 
 @layer base {
 	/* Contour visible uniquement pour la navigation au clavier */
 	:focus-visible {
-		outline: 2px solid var(--color-accent);
+		/* currentColor : reste visible sur le ciel clair comme sur la nuit. */
+		outline: 2px solid currentColor;
 		outline-offset: 3px;
 	}
 
