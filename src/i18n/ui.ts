@@ -26,31 +26,22 @@ export const ui = {
 			"Je cherche aujourd'hui à rejoindre une équipe où apprendre vite et contribuer concrètement : un environnement où l'on partage ses connaissances et où un profil junior motivé peut trouver sa place.",
 		'about.chip.search': 'Recherche : premier poste ou stage',
 		'about.chip.languages': 'Français · Anglais',
-		'skills.title': 'Ce que je sais faire',
-		'skills.symfony.title': 'Applications web Symfony',
-		'skills.symfony.desc':
-			'Contrôleurs, formulaires, Doctrine, sécurité et templates Twig.',
-		'skills.java.title': 'API REST en Java',
-		'skills.java.desc':
-			'Spring Boot, JPA, validation des données et tests JUnit.',
-		'skills.db.title': 'Bases de données',
-		'skills.db.desc': 'Modélisation relationnelle et requêtes MySQL.',
-		'skills.tooling.title': 'Outillage au quotidien',
-		'skills.tooling.desc':
-			'Docker pour les environnements, Git et revues de code.',
+		'skills.dev.title': 'Développement',
+		'skills.deploy.title': 'Déploiement',
 		'projects.title': 'Projets',
 		'projects.code': 'Voir le code',
 		'projects.demo': 'Démo en ligne',
 		'projects.placeholder': 'Capture à venir',
+		'projects.subtitle': 'Code, démo et captures pour chacun',
+		'projects.portfolio.title': 'Ce portfolio',
+		'projects.portfolio.desc':
+			'Site bilingue statique, testé avec Vitest, déployé sur mon VPS derrière Traefik.',
 		'projects.budget.title': 'Gestionnaire de budget',
 		'projects.budget.desc':
 			'Application de suivi des dépenses personnelles : catégories, budgets mensuels, graphiques de synthèse et export CSV. Authentification et gestion des rôles.',
 		'projects.booking.title': 'API de réservations',
 		'projects.booking.desc':
 			'API REST de réservation de créneaux : disponibilités, gestion des conflits, validation des données et documentation OpenAPI. Testée avec JUnit, livrée en conteneur Docker.',
-		'projects.bixi.title': 'Carte BIXI',
-		'projects.bixi.desc':
-			'Carte interactive des stations BIXI construite à partir des données ouvertes de Montréal : vélos et bornes disponibles, filtres par arrondissement.',
 		'contact.title': 'Contact',
 		'contact.text':
 			'Un poste, un stage ou simplement une question ? Écrivez-moi, je réponds rapidement.',
@@ -90,29 +81,22 @@ export const ui = {
 			"I'm now looking to join a team where I can learn fast and make a real contribution: a place where knowledge is shared and a motivated junior developer can grow.",
 		'about.chip.search': 'Looking for: first job or internship',
 		'about.chip.languages': 'French · English',
-		'skills.title': 'What I can do',
-		'skills.symfony.title': 'Symfony web applications',
-		'skills.symfony.desc':
-			'Controllers, forms, Doctrine, security and Twig templates.',
-		'skills.java.title': 'REST APIs in Java',
-		'skills.java.desc': 'Spring Boot, JPA, data validation and JUnit tests.',
-		'skills.db.title': 'Databases',
-		'skills.db.desc': 'Relational modeling and MySQL queries.',
-		'skills.tooling.title': 'Everyday tooling',
-		'skills.tooling.desc': 'Docker for environments, Git and code reviews.',
+		'skills.dev.title': 'Development',
+		'skills.deploy.title': 'Deployment',
 		'projects.title': 'Projects',
 		'projects.code': 'View code',
 		'projects.demo': 'Live demo',
 		'projects.placeholder': 'Screenshot coming soon',
+		'projects.subtitle': 'Code, demo and screenshots for each',
+		'projects.portfolio.title': 'This portfolio',
+		'projects.portfolio.desc':
+			'Static bilingual site, tested with Vitest, deployed on my VPS behind Traefik.',
 		'projects.budget.title': 'Budget tracker',
 		'projects.budget.desc':
 			'Personal expense tracking app: categories, monthly budgets, summary charts and CSV export. Authentication and role management.',
 		'projects.booking.title': 'Booking API',
 		'projects.booking.desc':
 			'REST API for booking time slots: availability, conflict handling, data validation and OpenAPI documentation. Tested with JUnit, shipped as a Docker container.',
-		'projects.bixi.title': 'BIXI map',
-		'projects.bixi.desc':
-			'Interactive map of BIXI stations built from Montréal open data: available bikes and docks, filters by borough.',
 		'contact.title': 'Contact',
 		'contact.text':
 			'A job, an internship or just a question? Write to me, I reply quickly.',

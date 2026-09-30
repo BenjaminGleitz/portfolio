@@ -11,11 +11,13 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<!-- Pas de titre visible : le libellé sert aux lecteurs d'écran. -->
-<section aria-label={t('techBand.label')} class="bg-surface">
-	<ul class="flex flex-wrap justify-center gap-x-[22px] gap-y-3 px-6 py-[22px] text-[15px] font-light text-subtle md:px-gutter lg:h-[100px] lg:items-center lg:justify-between lg:py-0 lg:text-[21px]">
+<!-- Fin d'après-midi : la couleur pêche du bas du ciel se prolonge. Pas de titre visible : le libellé sert aux lecteurs d'écran. -->
+<section aria-label={t('techBand.label')} class="bg-sky-5 text-night">
+	<ul class="flex flex-wrap justify-center gap-x-6 gap-y-3 px-6 py-5 font-mono text-sm md:px-gutter md:text-[15px] lg:justify-between">
 		{profile.techs.map((tech) => (
-			<li class="transition-colors duration-250 hover:text-text">{tech}</li>
+			<li class="text-night/70 transition-colors duration-250 before:mr-2 before:text-dusk before:content-['·'] hover:text-night">
+				{tech}
+			</li>
 		))}
 	</ul>
 </section>
