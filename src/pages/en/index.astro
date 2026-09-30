@@ -2,10 +2,12 @@
 import Header from '../../components/Header.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getLang } from '../../i18n/utils.ts';
+import Nav from '../../components/Nav.astro';
 
 const lang = getLang(Astro.currentLocale);
 ---
 
 <Layout lang={lang}>
+	<Nav lang={lang} />
 	<Header lang={lang} />
 </Layout>

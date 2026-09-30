@@ -1,3 +1,3 @@
 export const profile = {
-	name: 'John Doe',
+	name: 'Benjamin gleitz',
 };

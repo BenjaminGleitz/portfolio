@@ -1,0 +1,103 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { profile } from '../data/profile';
+import { languages, type ui } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+	lang: keyof typeof ui;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Ancres des sections : identiques dans les deux langues, seul le libellé est traduit.
+const links = [
+	{ href: '#home', key: 'nav.home' },
+	{ href: '#about', key: 'nav.about' },
+	{ href: '#projects', key: 'nav.projects' },
+	{ href: '#contact', key: 'nav.contact' },
+] as const;
+
+const locales = Object.keys(languages) as (keyof typeof languages)[];
+---
+
+<div class="relative flex h-18 items-center justify-between px-6 md:h-24 md:px-30">
+	<a
+		href="#home"
+		class="text-[18px] font-medium tracking-[.01em] md:text-[21px]"
+	>
+		{profile.name}
+		<span class="text-accent">.</span>
+	</a>
+
+	<div class="flex items-center gap-3.5 md:gap-12">
+		<!-- Sur mobile, le menu passe après FR/EN (order-last) comme sur la maquette. -->
+		<nav aria-label={t('nav.label')} class="order-last md:order-none">
+			<!-- Le bouton est le "peer" : la liste s'affiche quand il porte aria-expanded="true". -->
+			<button
+				type="button"
+				class="peer flex size-11 cursor-pointer flex-col items-end justify-center gap-1.5 md:hidden"
+				aria-label={t('nav.menu')}
+				aria-expanded="false"
+				aria-controls="nav-menu"
+				data-nav-toggle
+			>
+				<span class="block h-[1.5px] w-[22px] bg-text"></span>
+				<span class="block h-[1.5px] w-[22px] bg-text"></span>
+				<span class="block h-[1.5px] w-[22px] bg-text"></span>
+			</button>
+
+			<ul
+				id="nav-menu"
+				class="absolute inset-x-0 top-full z-10 hidden flex-col gap-6 border-b border-line bg-bg px-6 py-8 text-base peer-aria-expanded:flex md:static md:flex md:flex-row md:gap-10 md:border-0 md:bg-transparent md:p-0 md:text-sm"
+			>
+				{links.map((link) => (
+					<li>
+						<a
+							href={link.href}
+							class="relative pb-1.5 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-350 after:ease-out hover:after:scale-x-100 focus-visible:after:scale-x-100"
+						>
+							{t(link.key)}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+
+		<ul class="flex rounded-full border border-line p-[3px] text-xs font-medium">
+			{locales.map((locale) => (
+				<li>
+					<a
+						href={getRelativeLocaleUrl(locale)}
+						hreflang={locale}
+						lang={locale}
+						aria-label={languages[locale]}
+						aria-current={locale === lang ? 'page' : undefined}
+						class="block rounded-full px-[11px] py-[5px] text-muted transition-colors hover:text-text aria-[current=page]:bg-accent aria-[current=page]:text-bg"
+					>
+						{locale.toUpperCase()}
+					</a>
+				</li>
+			))}
+		</ul>
+	</div>
+</div>
+
+<script>
+	// Ouvre/ferme le menu mobile : on ne bascule que aria-expanded, le CSS fait le reste.
+	const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+	const setOpen = (open: boolean) =>
+		toggle?.setAttribute('aria-expanded', String(open));
+
+	toggle?.addEventListener('click', () =>
+		setOpen(toggle.getAttribute('aria-expanded') !== 'true'),
+	);
+	// Referme après un clic sur un lien de section ou avec Échap.
+	document
+		.querySelectorAll('#nav-menu a')
+		.forEach((link) => link.addEventListener('click', () => setOpen(false)));
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape') setOpen(false);
+	});
+</script>
